@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.constraints import UniqueConstraint
 
 
 class CustomUser(AbstractUser):
@@ -20,6 +21,11 @@ class DailyRecord(models.Model):
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE, related_name= 'habits')
     date = models.DateField(null=True)
     amount_completed = models.IntegerField(null=True)
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['habit', 'date'], name='unique_constraint')
+        ]
 
     def __str__(self):
         return str(self.date)
