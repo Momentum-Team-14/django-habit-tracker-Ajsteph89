@@ -18,7 +18,7 @@ class Habit(models.Model):
         return self.habit_name
 
 class DailyRecord(models.Model):
-    habit = models.ForeignKey(Habit, on_delete=models.CASCADE, related_name= 'habits')
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE, related_name= 'records')
     date = models.DateField(null=True)
     amount_completed = models.IntegerField(null=True)
 

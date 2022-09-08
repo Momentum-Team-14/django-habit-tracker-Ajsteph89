@@ -6,7 +6,9 @@
     </div>
     <div>
         {% for habit in habits %}
-            <div>{{ habit.habit_name }}</div>
+        <a href="{% url 'habit_detail' pk=habit.pk %}" >{{ habit.habit_name }}</a>
+
+            <div></div>
         {% endfor %}
     </div>
 {% endblock %}

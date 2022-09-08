@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        {{habit.habit_name}} Goal: {{ habit.goal_amount }} {{ habit.unit }} a Day
+    </div>
+    <a href="{% url 'add_record' pk=habit.pk %}">Add New Record</a>
+        <div>Log:</div>
+        {% for record in records %}
+            <div>{{ record.date }}: {{ record.amount_completed }} {{ habit.unit }}</div>
+        {% endfor %}
+{% endblock %}
