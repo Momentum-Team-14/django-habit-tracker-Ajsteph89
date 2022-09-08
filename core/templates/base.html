@@ -11,8 +11,9 @@
 <body>
     <header>Habit Tracker</header>
     <a href="{% url 'list_habits' %}">Home</a>
+    {% if user.is_authenticated %}
     <a href="/accounts/logout/">Logout</a>
-
+    {% endif %}
     <div>
         {% block content %}
         {% endblock %}

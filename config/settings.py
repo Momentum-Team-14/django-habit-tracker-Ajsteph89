@@ -86,8 +86,6 @@ DATABASES = {
     }
 }
 
-django_on_heroku.settings(locals())
-# del DATABASES['default']['OPTIONS']['sslmode']
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -137,3 +135,6 @@ AUTH_USER_MODEL = "core.CustomUser"
 
 LOGIN_REDIRECT_URL = '/'
 
+
+django_on_heroku.settings(locals())
+# del DATABASES['default']['OPTIONS']['sslmode']
