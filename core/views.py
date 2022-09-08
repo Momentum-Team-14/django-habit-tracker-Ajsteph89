@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from core.models import DailyRecord, Habit
 from .forms import HabitForm, RecordForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -10,10 +11,12 @@ def home(request):
         return redirect("list_habits")
     return render(request, "core/home.html")
 
+@login_required
 def list_habits(request):
     habits = Habit.objects.filter(user=request.user)
     return render(request, 'core/list_habits.html', {'habits': habits})
 
+@login_required
 def add_habit(request):
     if request.method == "POST":
         habit_form = HabitForm(request.POST)
@@ -26,14 +29,14 @@ def add_habit(request):
         habit_form = HabitForm()
     return render(request, 'core/add_habit.html', {'habit_form': habit_form})
 
-
+@login_required
 def habit_detail(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = habit.records.all()
     return render(request, "core/habit_detail.html", {'records': records,
         'habit': habit})
 
-
+@login_required
 def add_record(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     if request.method == "POST":
@@ -47,6 +50,7 @@ def add_record(request, pk):
         record_form = RecordForm()
     return render(request, 'core/add_record.html', {'record_form': record_form})
 
+@login_required
 def edit_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     if request.method == "POST":
@@ -59,12 +63,13 @@ def edit_habit(request, pk):
         habit_form = HabitForm(instance=habit)
     return render(request, 'core/edit_habit.html', {'habit_form': habit_form})
 
+@login_required
 def delete_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     habit.delete()
     return redirect('list_habits')
 
-
+@login_required
 def edit_record(request, pk1, pk2):
     record = get_object_or_404(DailyRecord, pk=pk2)
     habit = get_object_or_404(Habit, pk=pk1)
@@ -80,6 +85,7 @@ def edit_record(request, pk1, pk2):
         record_form = RecordForm(instance=record)
     return render(request, 'core/edit_record.html', {'record_form': record_form})
 
+@login_required
 def delete_record(request, pk1, pk2):
     record = get_object_or_404(DailyRecord, pk=pk2)
     record.delete()
