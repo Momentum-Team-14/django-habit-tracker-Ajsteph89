@@ -8,5 +8,10 @@
         <div>Log:</div>
         {% for record in records %}
             <div>{{ record.date }}: {{ record.amount_completed }} {{ habit.unit }}</div>
+            <a href="{% url 'edit_record' pk1=habit.pk pk2=record.pk %}">Edit</a>
+            <a href="{% url 'delete_record' pk1=habit.pk pk2=record.pk %}">Delete</a>
         {% endfor %}
+        <div>
+            <a href="{% url 'list_habits' %}">Back</a>
+        </div>
 {% endblock %}
