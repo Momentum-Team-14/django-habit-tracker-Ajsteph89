@@ -7,7 +7,7 @@
     <a href="{% url 'add_record' pk=habit.pk %}">Add New Record</a>
         <div>Log:</div>
         {% for record in records %}
-            <div>{{ record.date }}: {{ record.amount_completed }} {{ habit.unit }}</div>
+            <div>{{ record.date }}: {{ record.amount_completed }} {{ habit.unit }} {{ percentage }}% of Goal</div>
             <a href="{% url 'edit_record' pk1=habit.pk pk2=record.pk %}">Edit</a>
             <a href="{% url 'delete_record' pk1=habit.pk pk2=record.pk %}">Delete</a>
         {% endfor %}

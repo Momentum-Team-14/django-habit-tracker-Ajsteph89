@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from core.models import DailyRecord, Habit
 from .forms import HabitForm, RecordForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 
 # Create your views here.
 
@@ -13,7 +14,7 @@ def home(request):
 
 @login_required
 def list_habits(request):
-    habits = Habit.objects.filter(user=request.user)
+    habits = Habit.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'core/list_habits.html', {'habits': habits})
 
 @login_required
@@ -32,9 +33,11 @@ def add_habit(request):
 @login_required
 def habit_detail(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
-    records = habit.records.all()
-    return render(request, "core/habit_detail.html", {'records': records,
-        'habit': habit})
+    records = habit.records.all().order_by('-date')
+    for record in records:
+        percentage = 100 * (record.amount_completed / habit.goal_amount) 
+    return render(request, "core/habit_detail.html", {'records':records,
+        'habit':habit, 'percentage':percentage})
 
 @login_required
 def add_record(request, pk):
