@@ -34,10 +34,8 @@ def add_habit(request):
 def habit_detail(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = habit.records.all().order_by('-date')
-    for record in records:
-        percentage = 100 * (record.amount_completed / habit.goal_amount) 
     return render(request, "core/habit_detail.html", {'records':records,
-        'habit':habit, 'percentage':percentage})
+        'habit':habit})
 
 @login_required
 def add_record(request, pk):
