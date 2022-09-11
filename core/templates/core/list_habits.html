@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="new_link">
+        <h2>{{ user }}'s Habits</h2>
+        <a href="{% url 'add_habit' %}">Add New</a>
+    </div>
+    <div class='habit_list'>
+        {% for habit in habits %}
+        <a class='habit_name' href="{% url 'habit_detail' pk=habit.pk %}" >{{ habit.habit_name }}</a>
+        <a href="{% url 'edit_habit' pk=habit.pk %}">Edit</a>
+        <a href="{% url 'delete_habit' pk=habit.pk %}">Delete</a> 
+
+            <div></div>
+        {% endfor %}
+    </div>
+{% endblock %}
