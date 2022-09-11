@@ -1,0 +1,39 @@
+body {
+    background-color:rgb(196, 240, 240);
+}
+
+header {
+    font-size: x-large;
+    text-align: center;
+}
+
+.controls {
+    background-color: rgb(49, 146, 114);
+    margin: 1rem;
+    text-align: center;
+    font-size: large;
+    
+}
+
+h2 {
+    margin: 1rem;
+}
+
+.habit_list {
+    margin: 1rem;
+}
+
+.habit_name {
+    font-size: larger;
+    font-weight: bolder;
+    margin-right: .5rem;
+}
+
+.record_list {
+    margin: 1rem;
+}
+
+.log_item {
+    font-size: larger;
+    font-weight: bolder;
+}

@@ -6,14 +6,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Habit Tracker</title>
 </head>
 <body>
-    <header>Habit Tracker</header>
-    <a href="{% url 'list_habits' %}">Home</a>
-    {% if user.is_authenticated %}
-    <a href="/accounts/logout/">Logout</a>
-    {% endif %}
+    <header><h1>Habit Tracker</h1></header>
+    <div class = 'controls'>
+        <a href="{% url 'list_habits' %}">Home</a>
+        {% if user.is_authenticated %}
+        <a href="/accounts/logout/">Logout</a>
+        {% endif %}
+    </div>
     <div>
         {% block content %}
         {% endblock %}
